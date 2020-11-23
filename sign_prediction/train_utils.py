@@ -1,6 +1,4 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
-from keras.preprocessing import sequence
-from keras.datasets import imdb
 from keras import layers, models
 from keras.models import Sequential
 from keras import layers
@@ -30,29 +28,27 @@ def load_data(dirname):
     for file in listfile:
         if "_" in file:
             continue
-        wordname=file
-        textlist=os.listdir(dirname+wordname)
-        a=len(textlist)
-        b=a//3
-        k=0
+        wordname = file
+        textlist = os.listdir(dirname + wordname)
+        k = 0
         for text in textlist:
             if "DS_" in text:
                 continue
-            textname=dirname+wordname+"/"+text
-            numbers=[]
-            #print(textname)
+            textname = dirname + wordname + "/" + text
+            numbers = []
             with open(textname, mode = 'r') as t:
                 numbers = [float(num) for num in t.read().split()]
-                for i in range(len(numbers),25200):
+                for i in range(len(numbers), 25200):
                     numbers.extend([0.000]) 
-            row=0
-            landmark_frame=[]
-            for i in range(0,70):
+            row = 0
+            landmark_frame = []
+            for i in range(0, 70):
                 landmark_frame.extend(numbers[row:row+84])
                 row += 84
-            landmark_frame=np.array(landmark_frame)
-            landmark_frame=list(landmark_frame.reshape(-1,84))
-            if (k%3==2):
+            landmark_frame = np.array(landmark_frame)
+            landmark_frame = list(landmark_frame.reshape(-1,84))
+
+            if (k % 9 == 1):
                 XT.append(np.array(landmark_frame))
                 YT.append(wordname)
             else:
@@ -102,8 +98,12 @@ def build_model(label):
     model = Sequential()
     model.add(layers.LSTM(64, return_sequences=True,
                    input_shape=(70, 84))) 
-    model.add(layers.LSTM(32, return_sequences=True))
-    model.add(layers.LSTM(32))
+    model.add(layers.LSTM(64, return_sequences=True))
+    model.add(layers.LSTM(64, return_sequences=True))
+    model.add(layers.LSTM(64, return_sequences=True))
+    model.add(layers.LSTM(64, return_sequences=True))
+    model.add(layers.LSTM(64, return_sequences=True))
+    model.add(layers.LSTM(64))
     model.add(layers.Dense(label, activation='softmax'))
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam',
