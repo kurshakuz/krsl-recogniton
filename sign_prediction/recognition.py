@@ -82,7 +82,7 @@ def load_label():
     return label
 
 def parse_video_and_generate_files(input_data_path, output_data_path):
-    comp='bazel build -c opt --define MEDIAPIPE_DISABLE_GPU=1 \mediapipe/examples/desktop/hand_tracking:hand_tracking_cpu'
+    comp='cd .. && bazel build -c opt --define MEDIAPIPE_DISABLE_GPU=1 \mediapipe/examples/desktop/hand_tracking:hand_tracking_cpu'
     cmd='GLOG_logtostderr=1 bazel-bin/mediapipe/examples/desktop/hand_tracking/hand_tracking_cpu \--calculator_graph_config_file=mediapipe/graphs/hand_tracking/hand_tracking_desktop_live.pbtxt'
     listfile=os.listdir(input_data_path)
 
@@ -157,4 +157,4 @@ if __name__ == "__main__":
     files_nested = True
 
     parse_video_and_generate_files(input_data_path, output_data_path)
-    recogintion(files_nested, processed_data_path)
+    # recogintion(files_nested, processed_data_path)
