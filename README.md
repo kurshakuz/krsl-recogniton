@@ -143,10 +143,19 @@ Note: This currently works only on Linux, and please first follow
 
 ## Running the pretrained model for sign language recognition
 
-Insert your data to any folder and pass it as a ```--processed_data_path``` variable. The result will appear in the same folder and will be stored in the `result.txt`.
-
 ```bash
 cd sign_prediction/
+```
 
+Insert your data to any folder and pass it as a ```--processed_data_path``` variable . The result will appear in the same folder and will be stored in the `result.txt`.
+
+```bash
 python3 predict.py --processed_data_path='./test_video_output/'
+```
+
+Otherwise, place your video in any folder and pass it as the argument in the `--input_data_path` . Then run the following scripts.
+
+```bash
+python3 recognition.py --input_data_path='./spreadthesign-isolated-test/' --output_data_path='./spreadthesign-isolated-test-out'/
+
 ```
