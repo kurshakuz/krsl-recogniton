@@ -107,6 +107,16 @@ def main(files_nested, processed_data_path):
         certainty = round(100*yhat[idx][predictions[idx]], 1)
         if certainty > 50:
             print(Y[idx], " - ", rev_labels[i], ", ", certainty, "%")
+
+    # s=0
+    # txtpath=processed_data_path+"result.txt" 
+    # with open(txtpath, "w") as f:
+    #     for i in predictions:
+    #         f.write(Y[s])
+    #         f.write(" ")
+    #         f.write(rev_labels[i])
+    #         f.write("\n")
+    #         s+=1
         
 if __name__ == "__main__":  
     parser = argparse.ArgumentParser(description='Predict Sign language with Mediapipe')

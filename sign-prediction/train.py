@@ -10,7 +10,7 @@ def main(dirname):
     print(model.summary())
     print('Training stage')
     print('==============')
-    history = model.fit(x_train, y_train, epochs=100, batch_size=16, validation_data=(x_test, y_test))
+    history = model.fit(x_train, y_train, epochs=250, batch_size=16, validation_data=(x_test, y_test))
     score, acc = model.evaluate(x_test, y_test, batch_size=16, verbose=0)
     print('Test performance: accuracy={0}, loss={1}'.format(acc, score))
     model.save('model.h5')
