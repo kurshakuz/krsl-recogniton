@@ -73,7 +73,7 @@ def load_label():
     with open("label.txt",mode='r') as l:
         listfile=[i for i in l.read().split()]
     label = {}
-    count = 1
+    count = 0
     for l in listfile:
         if "_" in l:
             continue
@@ -93,25 +93,22 @@ def main(files_nested, processed_data_path):
 
     labels=load_label()
     xhat = x_test
-    print(xhat)
+    # print(xhat)
 
     yhat = new_model.predict(xhat)
 
-    print(yhat)
+    # print(yhat)
     predictions = np.array([np.argmax(pred) for pred in yhat])
     rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
-    s = 0
-    filel = np.array(Y)
-    txtpath = processed_data_path + "result.txt" 
-    with open(txtpath, "w") as f:
-        for i in predictions:
-            f.write(Y[s])
-            f.write(" ")
-            f.write(rev_labels[i])
-            f.write("\n")
-            s += 1
 
-if __name__ == "__main__":
+    # print(predictions)
+
+    for idx, i in enumerate(predictions):
+        certainty = round(100*yhat[idx][predictions[idx]], 1)
+        if certainty > 50:
+            print(Y[idx], " - ", rev_labels[i], ", ", certainty, "%")
+        
+if __name__ == "__main__":  
     parser = argparse.ArgumentParser(description='Predict Sign language with Mediapipe')
     parser.add_argument("--processed_data_path",help=" ")
     parser.add_argument("--files_nested",help="1 or 0")
