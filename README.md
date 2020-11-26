@@ -147,15 +147,34 @@ Note: This currently works only on Linux, and please first follow
 cd sign_prediction/
 ```
 
-Insert your data to any folder and pass it as a ```--processed_data_path``` variable . The result will appear in the same folder and will be stored in the `result.txt`.
+Insert your data to any folder and pass it as a ```--processed_data_path``` variable . The result will appear in the same folder and will printed in the terminal.
 
 ```bash
-python3 predict.py --processed_data_path='./test_video_output/'
+python3 predict.py --processed_data_path='./test_video_output/' --files_nested=0
 ```
 
+Otherwise, see the results of training on the gathered images as below:
+
+```bash
+python3 predict.py --processed_data_path='./V2-videos-5signers-isolated-signs-out/Relative/' --files_nested=1
+```
+
+## End to end video to text recognition. (Under testing)
+
+If you want to directly run the whole prediction algorithm starting from video input, places them in the `video-folder` and run following script:
+
+```bash
+cd ..
+
+python3 recognition.py --input_data_path='./video-folder/' --output_data_path='./video-folder-out/'
+```
+
+<!-- 
 Otherwise, place your video in any folder and pass it as the argument in the `--input_data_path` . Then run the following scripts.
 
 ```bash
 python3 recognition.py --input_data_path='./spreadthesign-isolated-test/' --output_data_path='./spreadthesign-isolated-test-out'/
 
-```
+``` -->
+
+
