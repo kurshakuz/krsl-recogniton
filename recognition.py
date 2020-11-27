@@ -122,7 +122,7 @@ def recogintion(files_nested, processed_data_path):
         x_test, Y = load_data(output_dir)
 
     # new_model = tf.keras.models.load_model('sign-prediction/model.h5')
-    new_model = tf.keras.models.load_model('sign-prediction/model_isolated_rel.h5')
+    new_model = tf.keras.models.load_model('sign-prediction/model.h5')
 
     
     new_model.summary()
