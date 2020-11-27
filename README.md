@@ -1,6 +1,38 @@
 # Kazakh-Russian Sign Language Recognition using Mediapipe and Tensorflow
 
-## Installing on Debian and Ubuntu
+## Prerequisites
+
+### Install and Update Python3 and Pip
+```bash
+sudo pip3 install ––upgrade pip
+
+pip3 install ––upgrade setuptools
+```
+
+### Install TensorFlow
+The TensorFlow installation is straightforward. Use Pip and this command to install it:
+```bash
+pip3 install tensorflow 
+```
+
+Verify the installation was successful by checking the software package information:
+```bash
+pip3 show tensorflow
+```
+The system should display the version and other data about TensorFlow.
+
+
+### Install Keras
+Finally, install Keras with the following command:
+```bash
+pip3 install keras
+```
+Verify the installation by displaying the package information:
+```bash
+pip3 show keras
+```
+
+## Installing Mediapipe on Debian and Ubuntu
 
 1.  Checkout MediaPipe repository.
 
@@ -159,22 +191,14 @@ Otherwise, see the results of training on the gathered images as below:
 python3 predict.py --processed_data_path='./V2-videos-5signers-isolated-signs-out/Relative/' --files_nested=1
 ```
 
-## End to end video to text recognition. (Under testing)
+## End to end video to text recognition.
 
-If you want to directly run the whole prediction algorithm starting from video input, places them in the `video-folder` and run following script:
+If you want to directly run the whole prediction algorithm starting from video input, place them in the `video-folder` and run following script:
 
 ```bash
 cd ..
 
-python3 recognition.py --input_data_path='./video-folder/' --output_data_path='./video-folder-out/'
+python3 recognition.py --input_data_path='./sign-prediction/recognition/video-folder/' --output_data_path='./sign-prediction/recognition/video-folder-out/'
 ```
 
-<!-- 
-Otherwise, place your video in any folder and pass it as the argument in the `--input_data_path` . Then run the following scripts.
-
-```bash
-python3 recognition.py --input_data_path='./spreadthesign-isolated-test/' --output_data_path='./spreadthesign-isolated-test-out'/
-
-``` -->
-
-
+Some example videos from the SpreadTheSign dataset are already placed there, and if you run it, terminal will show the actual class, predicted class, and the confidence percentage.

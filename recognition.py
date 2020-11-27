@@ -9,8 +9,6 @@ def load_data_nested(dirname):
     listfile=os.listdir(dirname)
     X = []
     Y = []
-    # print(listfile)
-    # print(dirname)
     for file in listfile:
         if "_" in file:
             continue
@@ -36,7 +34,6 @@ def load_data_nested(dirname):
             Y.append(wordname)
     X=np.array(X)
     Y=np.array(Y)
-    # print(Y)
     x_train = X
     x_train=np.array(x_train)
     return x_train,Y
@@ -65,7 +62,6 @@ def load_data(dirname):
         Y.append(text)
     X = np.array(X)
     Y = np.array(Y)
-    # print(Y)
     x_train = X
     x_train=np.array(x_train)
     return x_train,Y
@@ -121,10 +117,7 @@ def recogintion(files_nested, processed_data_path):
     else:
         x_test, Y = load_data(output_dir)
 
-    # new_model = tf.keras.models.load_model('sign-prediction/model.h5')
     new_model = tf.keras.models.load_model('sign-prediction/model.h5')
-
-    
     new_model.summary()
 
     labels=load_label()
@@ -132,40 +125,33 @@ def recogintion(files_nested, processed_data_path):
     yhat = new_model.predict(xhat)
     predictions = np.array([np.argmax(pred) for pred in yhat])
     rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
-    
-    # print(yhat)
-    # print(Y)
-    # print(predictions)
-    # print(rev_labels)
 
-    # for s, i in enumerate(predictions):
-    #     print("Ground truth: ", Y[s])
-    #     print("Predicted sign: ", rev_labels[i])
-    #     print("Confidence: ", round(yhat[0][i]*100, 2), "%")
-    #     print("Confidence: ", yhat[0][i])
-    
-    s = 0
-    txtpath = processed_data_path + "result.txt" 
-    with open(txtpath, "w") as f:
-        for i in predictions:
-            f.write(Y[s])
-            f.write(" ")
-            f.write(rev_labels[i])
-            f.write("\n")
-            s += 1
+    predictions = np.array([np.argmax(pred) for pred in yhat])
+    rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
+
+    for idx, i in enumerate(predictions):
+        certainty = round(100*yhat[idx][predictions[idx]], 1)
+        print(Y[idx], " - ", rev_labels[i], ", ", certainty, "%")
+
+    # s = 0
+    # txtpath = processed_data_path + "result.txt" 
+    # with open(txtpath, "w") as f:
+    #     for i in predictions:
+    #         f.write(Y[s])
+    #         f.write(" ")
+    #         f.write(rev_labels[i])
+    #         f.write("\n")
+    #         s += 1
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Predict Sign language with Mediapipe')
     parser.add_argument("--input_data_path",help=" ")
     parser.add_argument("--output_data_path",help=" ")
-    # parser.add_argument("--processed_data_path",help=" ")
-    # parser.add_argument("--files_nested",help="1 or 0")
     args = parser.parse_args()
 
     input_data_path = args.input_data_path
     output_data_path = args.output_data_path
-    # processed_data_path = args.processed_data_path
-    processed_data_path = output_data_path + "/Relative/"
+    processed_data_path = output_data_path + "Relative/"
     files_nested = True
 
     parse_video_and_generate_files(input_data_path, output_data_path)
