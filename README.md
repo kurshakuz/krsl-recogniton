@@ -37,7 +37,7 @@ pip3 show keras
 1.  Checkout MediaPipe repository.
 
     ```bash
-    $ git clone https://github.com/kurshakuz/mediapipe.git
+    $ git clone https://github.com/kurshakuz/krsl-recogniton.git
 
     # Change directory into MediaPipe root directory
     $ cd mediapipe
