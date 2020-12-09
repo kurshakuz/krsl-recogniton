@@ -126,9 +126,6 @@ def recogintion(files_nested, processed_data_path):
     predictions = np.array([np.argmax(pred) for pred in yhat])
     rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
 
-    predictions = np.array([np.argmax(pred) for pred in yhat])
-    rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
-
     for idx, i in enumerate(predictions):
         certainty = round(100*yhat[idx][predictions[idx]], 1)
         print(Y[idx], " - ", rev_labels[i], ", ", certainty, "%")
